@@ -1,0 +1,37 @@
+#autoC_panel{
+	display:none;
+	position:absolute;
+	z-index:99;
+	background: #FFFFFF;
+    border: 1px solid #999999;
+}
+
+#autoC_panel ul{
+	list-style:none;
+	padding:0;
+	margin:0;
+}
+
+#autoC_panel ul li span{
+	font-size:12px;
+}
+
+#autoC_content .sel{
+	background:#a6d2ff;
+}
+
+#autoC_content li{
+	clear:both;
+	height:18px;
+	line-height:18px;
+	padding:0 2px;
+}
+
+#autoC_content .autoC_name{
+	float:left;
+}
+
+#autoC_content .autoC_count{
+	float:right;
+	color:#42ac1e;
+}
