@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mission.shop.admin.dao.mapper.merchant.IMerchantMapper">
+	<resultMap type="com.mission.shop.admin.dao.entity.merchant.MerchantEntity" id="merchant">
+		<result property="id" column="id" />
+		<result property="merchant_type_id" column="merchant_type_id" />
+		<result property="merchant_type_name" column="merchant_type_name" />
+		<result property="name" column="name" />
+		<result property="address" column="address" />
+		<result property="logo" column="logo" />
+		<result property="is_lock" column="is_lock" />
+		<result property="feature" column="feature" />
+		<result property="per_fee" column="per_fee" />
+		<result property="open_time" column="open_time" />
+		<result property="create_time" column="create_time" />
+		<result property="is_join" column="is_join" />
+		<result property="service" column="service" />
+		<result property="order_phone" column="order_phone" />
+		<result property="introduce" column="introduce" />
+		<result property="pop_pic1" column="pop_pic1" />
+		<result property="pop_pic2" column="pop_pic2" />
+		<result property="pop_pic3" column="pop_pic3" />
+		<result property="pop_pic4" column="pop_pic4" />
+	</resultMap>
+
+    <insert id="insertMerchant" parameterType="com.mission.shop.admin.dao.entity.merchant.MerchantEntity">
+			<![CDATA[insert into merchant(id,merchant_type_id,merchant_type_name,name,address,logo,is_lock,feature,per_fee,open_time,service,order_phone,introduce,pop_pic1,pop_pic2,pop_pic3,pop_pic4,is_join,create_time)
+						values(#{id},#{merchant_type_id,jdbcType=VARCHAR},#{merchant_type_name,jdbcType=VARCHAR},#{name},#{address,jdbcType=VARCHAR},#{logo,jdbcType=VARCHAR},#{is_lock,jdbcType=INTEGER},
+						#{feature,jdbcType=VARCHAR},#{per_fee,jdbcType=VARCHAR},#{open_time,jdbcType=VARCHAR},#{service,jdbcType=VARCHAR},#{order_phone,jdbcType=VARCHAR}
+						,#{introduce,jdbcType=VARCHAR},#{pop_pic1,jdbcType=VARCHAR},#{pop_pic2,jdbcType=VARCHAR},#{pop_pic3,jdbcType=VARCHAR},#{pop_pic4,jdbcType=VARCHAR},#{is_join,jdbcType=INTEGER},#{create_time,jdbcType=VARCHAR})
+			]]>
+	</insert>
+
+	<select id="getMerchant" parameterType="com.mission.shop.admin.utils.persistent.QueryCondition"
+		resultMap="merchant">
+		<![CDATA[select ${selectColumn} from merchant t where id=#{condition.id}]]>
+	</select>
+
+	<update id="updateMerchant" parameterType="com.mission.shop.admin.dao.entity.merchant.MerchantEntity">
+		<![CDATA[
+			update merchant set name = #{name},address=#{address},logo=#{logo,jdbcType=VARCHAR},is_lock=#{is_lock},is_join=#{is_join},feature=#{feature,jdbcType=VARCHAR},per_fee=#{per_fee,jdbcType=VARCHAR},
+			open_time=#{open_time,jdbcType=VARCHAR},service=#{service,jdbcType=VARCHAR},order_phone=#{order_phone,jdbcType=VARCHAR},introduce=#{introduce,jdbcType=VARCHAR},pop_pic1=#{pop_pic1,jdbcType=VARCHAR}
+			,pop_pic2=#{pop_pic2,jdbcType=VARCHAR},pop_pic3=#{pop_pic3,jdbcType=VARCHAR},pop_pic4=#{pop_pic4,jdbcType=VARCHAR}  where id=#{id}
+		]]>
+	</update>
+
+	<delete id="deleteMerchant" parameterType="java.lang.String">
+		<![CDATA[
+			delete from merchant where id = #{id}
+		]]>
+	</delete>
+
+	<sql id="query_condition">
+		<if test="condition.is_lock!=null and condition.is_lock!=''"><![CDATA[ and is_lock=#{condition.is_lock}]]></if>
+		<if test="condition.merchant_type_name!=null and condition.merchant_type_name!=''"><![CDATA[ and merchant_type_name like '%${condition.merchant_type_name}%']]></if>
+		<if test="condition.name!=null and condition.name!=''"><![CDATA[ and name like '%${condition.name}%' ]]></if>
+	</sql>
+
+    <select id="countMerchant" parameterType="com.mission.shop.admin.utils.persistent.QueryCondition"
+            resultType="java.lang.Long">
+        <![CDATA[select count(*) from merchant t where 1=1 ]]>
+        <include refid="query_condition"/>
+    </select>
+
+    <select id="queryMerchant" parameterType="com.mission.shop.admin.utils.persistent.QueryCondition"
+            resultMap="merchant">
+        <![CDATA[select ${selectColumn} from merchant  where 1=1 ]]>
+        <include refid="query_condition"/>
+        <![CDATA[ order by per_fee DESC ]]>
+        <if test="condition.maxnum!=null and condition.maxnum!='' and condition.minnum!=null and condition.minnum!=''"><![CDATA[limit #{condition.minnum},#{condition.maxnum}]]></if>
+    </select>
+</mapper>

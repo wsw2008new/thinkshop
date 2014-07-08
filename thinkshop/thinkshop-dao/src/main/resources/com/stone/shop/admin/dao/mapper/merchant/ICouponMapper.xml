@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mission.shop.admin.dao.mapper.merchant.ICouponMapper">
+	<resultMap type="com.mission.shop.admin.dao.entity.merchant.CouponEntity" id="coupon">
+		<result property="id" column="id" />
+		<result property="merchant_id" column="merchant_id" />
+		<result property="merchant_name" column="merchant_name" />
+		<result property="is_recommend" column="is_recommend" />
+		<result property="name" column="name" />
+		<result property="end_time" column="end_time" />
+		<result property="use_address" column="use_address" />
+		<result property="introduce" column="introduce" />
+		<result property="show_pic" column="show_pic" />
+	</resultMap>
+
+    <insert id="insertCoupon" parameterType="com.mission.shop.admin.dao.entity.merchant.CouponEntity">
+			<![CDATA[insert into coupon(id,merchant_id,merchant_name,is_recommend,name,end_time,use_address,introduce,show_pic)
+						values(#{id},#{merchant_id},#{merchant_name,jdbcType=VARCHAR},#{is_recommend,jdbcType=INTEGER},#{name,jdbcType=VARCHAR},#{end_time,jdbcType=VARCHAR},
+						#{use_address,jdbcType=VARCHAR},#{introduce,jdbcType=VARCHAR},#{show_pic,jdbcType=VARCHAR})
+			]]>
+	</insert>
+
+	<select id="getCoupon" parameterType="com.mission.shop.admin.utils.persistent.QueryCondition"
+		resultMap="coupon">
+		<![CDATA[select ${selectColumn} from coupon t where id=#{condition.id}]]>
+	</select>
+
+	<update id="updateCoupon" parameterType="com.mission.shop.admin.dao.entity.merchant.CouponEntity">
+		<![CDATA[
+			update coupon set name = #{name},is_recommend=#{is_recommend,jdbcType=INTEGER},end_time=#{end_time,jdbcType=VARCHAR},use_address=#{use_address,jdbcType=VARCHAR},introduce=#{introduce,jdbcType=VARCHAR},show_pic=#{show_pic,jdbcType=VARCHAR} where id=#{id}
+		]]>
+	</update>
+
+	<delete id="deleteCoupon" parameterType="java.lang.String">
+		<![CDATA[
+			delete from coupon where id = #{id}
+		]]>
+	</delete>
+
+	<sql id="query_condition">
+		<if test="condition.is_recommend!=null and condition.is_recommend!=''"><![CDATA[ and is_recommend=#{condition.is_recommend}]]></if>
+		<if test="condition.merchant_name!=null and condition.merchant_name!=''"><![CDATA[ and merchant_name like '%${condition.merchant_name}%' ]]></if>
+	</sql>
+
+    <select id="countCoupon" parameterType="com.mission.shop.admin.utils.persistent.QueryCondition"
+            resultType="java.lang.Long">
+        <![CDATA[select count(*) from coupon t where 1=1 ]]>
+        <include refid="query_condition"/>
+    </select>
+
+    <select id="queryCoupon" parameterType="com.mission.shop.admin.utils.persistent.QueryCondition"
+            resultMap="coupon">
+        <![CDATA[select ${selectColumn} from coupon  where 1=1 ]]>
+        <include refid="query_condition"/>
+        <if test="condition.maxnum!=null and condition.maxnum!='' and condition.minnum!=null and condition.minnum!=''"><![CDATA[limit #{condition.minnum},#{condition.maxnum}]]></if>
+    </select>
+</mapper>

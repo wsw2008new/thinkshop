@@ -1,0 +1,70 @@
+<beans:beans xmlns="http://www.springframework.org/schema/security"
+	xmlns:beans="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans  
+           http://www.springframework.org/schema/beans/spring-beans-3.2.xsd  
+           http://www.springframework.org/schema/security  
+           http://www.springframework.org/schema/security/spring-security-3.2.xsd">
+
+	<http request-matcher="ant" pattern="/**/*.jpg" security="none" />
+	<http request-matcher="ant" pattern="/**/*.png" security="none" />
+	<http request-matcher="ant" pattern="/**/*.gif" security="none" />
+	<http request-matcher="ant" pattern="/**/*.css" security="none" />
+	<http request-matcher="ant" pattern="/**/*.js" security="none" />
+	<http request-matcher="ant" pattern="/**/login.htm" security="none" />
+	<http request-matcher="ant" pattern="/getValidateCode.htm" security="none" />
+	
+	
+	<http auto-config="true" access-denied-page="/accessdenied.htm"
+		servlet-api-provision="true">
+<!-- 		<intercept-url pattern="/**/*.jpg" filters="none" /> -->
+<!-- 		<intercept-url pattern="/**/*.png" filters="none" /> -->
+<!-- 		<intercept-url pattern="/**/*.gif" filters="none" /> -->
+<!-- 		<intercept-url pattern="/**/*.css" filters="none" /> -->
+<!-- 		<intercept-url pattern="/**/*.js" filters="none" /> -->
+<!-- 		<intercept-url pattern="/**/login.*" filters="none" /> -->
+		<form-login login-page="/login.htm"
+			authentication-failure-url="/login.htm" default-target-url="/index.htm" />
+		<logout logout-success-url="/login.htm" />
+
+		<session-management invalid-session-url="/login.htm"
+			session-fixation-protection="migrateSession">
+			<concurrency-control max-sessions="1"
+				expired-url="/login.htm" error-if-maximum-exceeded="false" />
+		</session-management>
+		<custom-filter ref="myFilter" before="FILTER_SECURITY_INTERCEPTOR" />
+	</http>
+	<beans:bean id="myFilter"
+		class="com.mission.shop.admin.web.security.MyFilterSecurityInterceptor">
+		<beans:property name="authenticationManager" ref="authenticationManager" />
+		<beans:property name="accessDecisionManager" ref="myAccessDecisionManagerBean" />
+		<beans:property name="securityMetadataSource" ref="securityMetadataSource" />
+		<beans:property name="messageSource" ref="messageSource" />
+	</beans:bean>
+	<authentication-manager alias="authenticationManager">
+		<authentication-provider user-service-ref="myUserDetailService">
+			<!-- 如果用户的密码采用加密的话，可以加点“盐” -->
+			<password-encoder hash="md5" />
+		</authentication-provider>
+
+	</authentication-manager>
+	<beans:bean id="myUserDetailService"
+		class="com.mission.shop.admin.web.security.MyUserDetailService" />
+
+	<beans:bean id="myAccessDecisionManagerBean"
+		class="com.mission.shop.admin.web.security.MyAccessDecisionManager">
+	</beans:bean>
+
+	<beans:bean id="sessionEventPublisher"
+		class="com.mission.shop.admin.web.security.PaySessionEventPublisher">
+	</beans:bean>
+
+	<beans:bean id="securityMetadataSource"
+		class="com.mission.shop.admin.web.security.MyInvocationSecurityMetadataSource"
+		init-method="loadResourceDefine">
+	</beans:bean>
+
+	<beans:bean id="messageSource"
+		class="org.springframework.context.support.ReloadableResourceBundleMessageSource">
+		<beans:property name="basename" value="classpath:config" />
+	</beans:bean>
+</beans:beans>

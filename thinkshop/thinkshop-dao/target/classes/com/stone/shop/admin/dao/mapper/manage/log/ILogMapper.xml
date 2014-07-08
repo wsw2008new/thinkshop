@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mission.shop.admin.dao.mapper.manage.log.ILogMapper">
+
+    <resultMap type="com.mission.shop.admin.dao.entity.manage.log.LogEntity" id="log">
+        <result property="id" column="id" />
+        <result property="operatorId" column="operator_id" />
+        <result property="operatorName" column="operator_name" />
+        <result property="time" column="time" />
+        <result property="ip" column="ip" />
+        <result property="content" column="content" />
+    </resultMap>
+
+	<insert id="insertLog" parameterType="com.mission.shop.admin.dao.entity.manage.log.LogEntity">
+	<![CDATA[insert into SYS_LOG(id,operator_id,operator_name,time,content,ip) values(#{id},#{operatorId},#{operatorName},#{time},#{content},#{ip})]]>
+	</insert>
+
+	<select id="getLogById" parameterType="String" resultMap="log">
+		<![CDATA[select t.id,t.operator_id,t.operator_name,t.time,t.content,t.ip from SYS_LOG t where t.id=#{id}]]>
+	</select>
+
+	<select id="logCount" parameterType="java.util.Map"
+		resultType="java.lang.Long">
+		<![CDATA[select count(*) from SYS_LOG t where 1=1 ]]>
+		<if test="operatorId!=null and operatorId!=''"><![CDATA[ and operator_id=#{operatorId}]]></if>
+		<if test="operatorName!=null and operatorName!=''"><![CDATA[ and operator_name like '%'||#{operatorName}||'%']]></if>
+		<if test="beginTime !=null and beginTime !=''"><![CDATA[ and t.time >to_date(#{beginTime},'yyyy-mm-dd') ]]></if>
+		<if test="endTime !=null and endTime!=''"><![CDATA[ and t.time<(to_date(#{endTime},'yyyy-mm-dd')+1)]]></if>
+	</select>
+
+	<select id="queryLogs" parameterType="java.util.Map" resultMap="log">
+		<![CDATA[select *  from SYS_LOG  where 1=1 ]]>
+		<if test="id!=null and id!=''"><![CDATA[ and  id=#{id}]]></if>
+		<if test="operatorId!=null and operatorId!=''"><![CDATA[ and  operator_id = #{operatorId}]]></if>
+		<if test="operatorName!=null and operatorName!=''"><![CDATA[ and operator_name like '%'||#{operatorName}||'%']]></if>
+		<if test="beginTime !=null and beginTime !=''"><![CDATA[ and time >to_date(#{beginTime},'yyyy-mm-dd') ]]></if>
+		<if test="endTime !=null and endTime!=''"><![CDATA[ and time<(to_date(#{endTime},'yyyy-mm-dd')+1)]]></if>
+		<![CDATA[ order by time desc limit #{minnum},#{maxnum} ]]>
+	</select> 
+</mapper>
