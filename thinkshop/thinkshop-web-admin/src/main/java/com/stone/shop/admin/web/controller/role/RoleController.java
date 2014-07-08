@@ -17,16 +17,16 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.stone.shop.admin.service.manage.role.IOperatorRoleService;
-import com.stone.shop.admin.service.manage.role.IRoleService;
-import com.stone.shop.admin.utils.exception.WebException;
-import com.stone.shop.admin.utils.log.JscnLogger;
 import com.stone.shop.admin.web.controller.BaseController;
 import com.stone.shop.admin.web.security.MyInvocationSecurityMetadataSource;
-import com.stone.shop.base.common.page.Pagination;
+import com.stone.shop.common.page.Pagination;
 import com.stone.shop.domain.manage.role.OperatorEntity;
 import com.stone.shop.domain.manage.role.RoleEntity;
 import com.stone.shop.domain.persistent.ResultList;
+import com.stone.shop.service.manage.role.IOperatorRoleService;
+import com.stone.shop.service.manage.role.IRoleService;
+import com.stone.shop.utils.exception.WebException;
+import com.stone.shop.utils.log.JscnLogger;
 
 @Controller
 @RequestMapping("/rolegl")

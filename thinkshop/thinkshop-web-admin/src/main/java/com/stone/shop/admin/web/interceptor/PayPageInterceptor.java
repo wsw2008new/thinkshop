@@ -6,7 +6,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.stone.shop.base.common.page.PageUrlUtil;
+import com.stone.shop.common.page.PageUrlUtil;
 
 public class PayPageInterceptor implements HandlerInterceptor {
 

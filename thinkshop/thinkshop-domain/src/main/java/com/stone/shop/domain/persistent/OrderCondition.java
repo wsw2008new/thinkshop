@@ -4,7 +4,7 @@ import java.io.Serializable;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
-import com.stone.shop.base.common.utils.StringUtils;
+import com.stone.shop.common.utils.StringUtils;
 
 /**
  * 排序条件

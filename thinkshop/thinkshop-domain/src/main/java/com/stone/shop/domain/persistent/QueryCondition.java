@@ -9,7 +9,7 @@ import java.util.Iterator;
 import java.util.Map;
 import java.util.Set;
 
-import com.stone.shop.base.common.utils.StringUtils;
+import com.stone.shop.common.utils.StringUtils;
 
 /** 查询条件 */
 public class QueryCondition implements Serializable {

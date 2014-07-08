@@ -3,12 +3,12 @@ package com.stone.shop.admin.web.page.tag;
 import javax.servlet.jsp.JspException;
 import javax.servlet.jsp.tagext.BodyTagSupport;
 
-import com.stone.shop.admin.utils.log.JscnLogger;
-import com.stone.shop.base.common.utils.StringUtils;
+import com.stone.shop.common.utils.StringUtils;
 import com.stone.shop.domain.model.CheckState;
 import com.stone.shop.domain.model.Flow;
 import com.stone.shop.domain.model.PayType;
 import com.stone.shop.domain.model.SettState;
+import com.stone.shop.utils.log.JscnLogger;
 
 public class PayTag extends BodyTagSupport {
 	/**

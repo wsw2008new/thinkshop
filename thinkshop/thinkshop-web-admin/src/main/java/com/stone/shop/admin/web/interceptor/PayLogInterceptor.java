@@ -9,12 +9,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.stone.shop.admin.service.manage.log.ILogService;
 import com.stone.shop.admin.web.controller.BaseController;
 import com.stone.shop.admin.web.security.UserInfo;
-import com.stone.shop.base.common.page.PageUrlUtil;
-import com.stone.shop.base.common.utils.StringUtils;
+import com.stone.shop.common.page.PageUrlUtil;
+import com.stone.shop.common.utils.StringUtils;
 import com.stone.shop.domain.manage.log.LogEntity;
+import com.stone.shop.service.manage.log.ILogService;
 
 public class PayLogInterceptor extends BaseController implements
 		HandlerInterceptor {

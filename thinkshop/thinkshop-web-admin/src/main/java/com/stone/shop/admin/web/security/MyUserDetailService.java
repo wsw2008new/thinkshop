@@ -13,11 +13,11 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 
-import com.stone.shop.admin.dao.mapper.manage.role.IOperatorMapper;
-import com.stone.shop.admin.dao.mapper.manage.role.IOperatorRoleMapper;
-import com.stone.shop.admin.utils.log.JscnLogger;
+import com.stone.shop.dao.mapper.manage.role.IOperatorMapper;
+import com.stone.shop.dao.mapper.manage.role.IOperatorRoleMapper;
 import com.stone.shop.domain.manage.role.OperatorEntity;
 import com.stone.shop.domain.manage.role.OperatorRoleEntity;
+import com.stone.shop.utils.log.JscnLogger;
 
 public class MyUserDetailService implements UserDetailsService {
 

@@ -3,7 +3,7 @@ package com.stone.shop.domain.merchant;
 import java.io.Serializable;
 import java.util.Date;
 
-import com.stone.shop.base.common.utils.DateTimeUtils;
+import com.stone.shop.common.utils.DateTimeUtils;
 
 public class MerchantEntity implements Serializable{
 	/**

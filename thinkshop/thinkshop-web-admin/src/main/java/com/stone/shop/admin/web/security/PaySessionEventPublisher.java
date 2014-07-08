@@ -14,8 +14,8 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.web.authentication.WebAuthenticationDetails;
 import org.springframework.security.web.session.HttpSessionEventPublisher;
 
-import com.stone.shop.admin.service.manage.role.IOperatorService;
 import com.stone.shop.domain.manage.role.OperatorEntity;
+import com.stone.shop.service.manage.role.IOperatorService;
 
 public class PaySessionEventPublisher extends HttpSessionEventPublisher
         implements ApplicationListener<ApplicationEvent> {

@@ -13,7 +13,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import com.stone.shop.base.common.utils.EncryptUtil;
+import com.stone.shop.common.utils.EncryptUtil;
 
 /** Servlet Filter implementation class CodeFilter */
 public class LoginFilter extends HttpServlet implements Filter {

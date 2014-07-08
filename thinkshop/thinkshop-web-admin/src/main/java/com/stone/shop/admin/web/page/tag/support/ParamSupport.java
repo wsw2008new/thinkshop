@@ -9,7 +9,7 @@ import javax.servlet.jsp.JspTagException;
 import javax.servlet.jsp.tagext.BodyTagSupport;
 import javax.servlet.jsp.tagext.Tag;
 
-import com.stone.shop.base.common.utils.StringUtils;
+import com.stone.shop.common.utils.StringUtils;
 
 
 

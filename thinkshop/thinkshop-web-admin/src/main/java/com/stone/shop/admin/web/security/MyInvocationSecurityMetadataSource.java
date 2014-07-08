@@ -15,14 +15,14 @@ import org.springframework.security.web.access.intercept.FilterInvocationSecurit
 import org.springframework.util.AntPathMatcher;
 import org.springframework.util.PathMatcher;
 
-import com.stone.shop.admin.service.manage.role.IMenuRoleService;
-import com.stone.shop.admin.service.manage.role.IMenuService;
-import com.stone.shop.admin.service.manage.role.IRoleService;
-import com.stone.shop.admin.utils.log.JscnLogger;
-import com.stone.shop.base.common.utils.StringUtils;
+import com.stone.shop.common.utils.StringUtils;
 import com.stone.shop.domain.manage.role.MenuEntity;
 import com.stone.shop.domain.manage.role.RoleEntity;
 import com.stone.shop.domain.persistent.ResultList;
+import com.stone.shop.service.manage.role.IMenuRoleService;
+import com.stone.shop.service.manage.role.IMenuService;
+import com.stone.shop.service.manage.role.IRoleService;
+import com.stone.shop.utils.log.JscnLogger;
 
 public class MyInvocationSecurityMetadataSource implements FilterInvocationSecurityMetadataSource {
 

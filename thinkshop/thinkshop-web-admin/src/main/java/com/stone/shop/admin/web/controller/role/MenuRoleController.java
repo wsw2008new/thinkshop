@@ -8,15 +8,15 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.stone.shop.admin.service.manage.role.IMenuRoleService;
-import com.stone.shop.admin.utils.exception.WebException;
-import com.stone.shop.admin.utils.log.JscnLogger;
 import com.stone.shop.admin.web.controller.BaseController;
 import com.stone.shop.admin.web.security.MyInvocationSecurityMetadataSource;
 import com.stone.shop.admin.web.security.UserInfo;
 import com.stone.shop.domain.manage.role.MenuEntity;
 import com.stone.shop.domain.model.role.MenuRoleModel;
 import com.stone.shop.domain.persistent.ResultList;
+import com.stone.shop.service.manage.role.IMenuRoleService;
+import com.stone.shop.utils.exception.WebException;
+import com.stone.shop.utils.log.JscnLogger;
 
 @Controller
 @RequestMapping("/role")

@@ -5,7 +5,7 @@ package com.stone.shop.domain.persistent;
 
 import java.util.List;
 
-import com.stone.shop.base.common.page.Pagination;
+import com.stone.shop.common.page.Pagination;
 
 /**
  * 持久化结果集列表接口实现类

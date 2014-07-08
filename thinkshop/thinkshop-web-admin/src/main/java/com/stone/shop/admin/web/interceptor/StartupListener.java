@@ -8,7 +8,7 @@ import org.springframework.web.context.ContextLoaderListener;
 import org.springframework.web.context.WebApplicationContext;
 import org.springframework.web.context.support.WebApplicationContextUtils;
 
-import com.stone.shop.admin.utils.term.RequestHelper;
+import com.stone.shop.utils.term.RequestHelper;
 
 public class StartupListener extends ContextLoaderListener implements
 		ServletContextListener {

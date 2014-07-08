@@ -3,7 +3,7 @@ package com.stone.shop.domain.persistent;
 import java.io.Serializable;
 import java.util.List;
 
-import com.stone.shop.base.common.page.Pagination;
+import com.stone.shop.common.page.Pagination;
 
 
 /**
