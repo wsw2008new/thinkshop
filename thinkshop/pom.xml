@@ -12,6 +12,7 @@
   	<module>thinkshop-web-admin</module>
   	<module>thinkshop-web-product</module>
   	<module>thinkshop-web-user</module>
+  	<module>thinkshop-plugin</module>
   </modules>
   
   <properties>

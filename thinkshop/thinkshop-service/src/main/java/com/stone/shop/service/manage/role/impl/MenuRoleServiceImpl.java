@@ -12,9 +12,9 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.stone.shop.common.utils.StringUtils;
 import com.stone.shop.dao.mapper.manage.role.IMenuRoleMapper;
+import com.stone.shop.domain.manage.model.role.MenuRoleModel;
 import com.stone.shop.domain.manage.role.MenuEntity;
 import com.stone.shop.domain.manage.role.MenuRoleEntity;
-import com.stone.shop.domain.model.role.MenuRoleModel;
 import com.stone.shop.domain.persistent.ResultList;
 import com.stone.shop.domain.persistent.ResultListImpl;
 import com.stone.shop.exception.ServiceException;

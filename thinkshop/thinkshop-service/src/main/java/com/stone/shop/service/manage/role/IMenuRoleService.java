@@ -2,8 +2,8 @@ package com.stone.shop.service.manage.role;
 
 import java.util.List;
 
+import com.stone.shop.domain.manage.model.role.MenuRoleModel;
 import com.stone.shop.domain.manage.role.MenuEntity;
-import com.stone.shop.domain.model.role.MenuRoleModel;
 import com.stone.shop.domain.persistent.ResultList;
 import com.stone.shop.exception.ServiceException;
 

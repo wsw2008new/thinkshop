@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.stone.shop.dao.mapper.manage.role.IOperatorRoleMapper">
+	<resultMap type="com.stone.shop.domain.manage.role.OperatorRoleEntity"
+		id="operatorRole">
+		<result property="id" column="id" />
+		<result property="operatorId" column="operator_id" />
+		<result property="roleCode" column="role_code" />
+	</resultMap>
+	<resultMap type="com.stone.shop.domain.manage.role.OperatorEntity"
+		id="operator">
+		<result property="operatorId" column="operator_id" />
+		<result property="password" column="password" />
+		<result property="name" column="name" />
+		<result property="mobileNum" column="mobile_num" />
+		<result property="teleNum" column="tele_num" />
+		<result property="email" column="email" />
+		<result property="status" column="status" />
+		<result property="jobName" column="job_name" />
+		<result property="remark" column="remark" />
+		<result property="lastTime" column="last_time" />
+		<result property="lastIp" column="last_ip" />
+	</resultMap>
+
+	<select id="queryOperatorRoles" parameterType="String"
+		resultMap="operatorRole">
+		<![CDATA[
+        select t.id,t.operator_id,t.role_code from SYS_OPERATOR_ROLE t where t.operator_id=#{operatorId}
+        ]]>
+	</select>
+
+	<select id="searchOperatorRoles" parameterType="String"
+		resultMap="operator">
+		<![CDATA[
+        select t.operator_id,t.password,t.name,t.mobile_num,t.tele_num,t.email,t.status,t.job_name,t.remark,t.last_time,t.last_ip
+				 from SYS_OPERATOR t inner join  SYS_OPERATOR_ROLE t2 on t.operator_id=t2.operator_id where t2.role_code=#{roleCode}
+        ]]>
+	</select>
+
+	<select id="searchOperators" parameterType="String" resultMap="operator">
+		<![CDATA[
+        select o.operator_id as operatorId, o.name from SYS_OPERATOR o where not exists (select 'X' from SYS_OPERATOR_ROLE t where t.operator_id=o.operator_id and t.role_code=#{roleCode})
+        ]]>
+	</select>
+
+
+	<delete id="deleteOperatorRole" parameterType="String">
+		<if test="array!=null">
+<!--             <![CDATA[begin ]]> -->
+			<foreach collection="array" item="roleCode">
+                <![CDATA[delete from SYS_OPERATOR_ROLE where role_code=#{roleCode};]]>
+			</foreach>
+<!--             <![CDATA[ end;]]> -->
+		</if>
+	</delete>
+
+	<delete id="deleteRoleByOperator" parameterType="String">
+		<if test="array!=null">
+<!--             <![CDATA[begin ]]> -->
+			<foreach collection="array" item="operatorId">
+                <![CDATA[delete from SYS_OPERATOR_ROLE where operator_id=#{operatorId};]]>
+			</foreach>
+<!--             <![CDATA[ end;]]> -->
+		</if>
+	</delete>
+
+	<insert id="insertOperatorRole" parameterType="com.stone.shop.domain.manage.role.OperatorRoleEntity">
+		<if test="array!=null">
+<!--             <![CDATA[begin ]]> -->
+			<foreach collection="array" item="array">
+                <![CDATA[insert into SYS_OPERATOR_ROLE(id,operator_id,role_code)
+				values (#{array.id},#{array.operatorId},#{array.roleCode});]]>
+			</foreach>
+<!--             <![CDATA[ end;]]> -->
+		</if>
+	</insert>
+
+</mapper>

@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.stone.shop.dao.mapper.manage.role.IRoleMapper">
+    <resultMap type="com.stone.shop.domain.manage.role.RoleEntity" id="role">
+        <result property="code" column="code" />
+        <result property="title" column="title" />
+        <result property="remark" column="remark" />
+    </resultMap>
+
+    <select id="searchRoles" parameterType="java.util.Map"
+            resultType="com.stone.shop.domain.manage.role.RoleEntity">
+        <![CDATA[select * from sys_role where 1=1 ]]>
+        <if test="title!=null and title!=''">and  title like '%'||#{title}||'%'</if>
+        <if test="minnum!=null and maxnum!=''"><![CDATA[limit #{minnum},#{maxnum}]]></if>
+    </select>
+
+    <select id="roleCount" parameterType="java.util.Map" resultType="java.lang.Long">
+        <![CDATA[select count(*) from SYS_ROLE t where 1=1]]>
+        <if test="title!=null and title!=''">and title like '%'||#{title}||'%'</if>
+    </select>
+
+    <select id="getRole" parameterType="String"
+            resultType="com.stone.shop.domain.manage.role.RoleEntity">
+		<![CDATA[
+        select t.code,t.title,t.remark
+		 FROM SYS_ROLE t where t.code=#{code}
+        ]]>
+	</select>
+
+    <update id="updateRole" parameterType="com.stone.shop.domain.manage.role.RoleEntity">
+		<![CDATA[
+        update SYS_ROLE set
+				 title=#{title},
+				 remark=#{remark,jdbcType=VARCHAR}
+				 where code=#{code}
+        ]]>
+	</update>
+
+    <insert id="insertRole" parameterType="com.stone.shop.domain.manage.role.RoleEntity">
+		<![CDATA[
+        insert into SYS_ROLE(code,title,remark)
+		values (#{code},#{title},#{remark,jdbcType=VARCHAR})
+        ]]>
+	</insert>
+
+    <delete id="deleteRoles" parameterType="String">
+        <if test="array!=null">
+<!--             <![CDATA[begin ]]> -->
+            <foreach collection="array" item="code">
+                <![CDATA[delete from SYS_ROLE where code=#{code};]]>
+            </foreach>
+<!--             <![CDATA[ end;]]> -->
+        </if>
+    </delete>
+</mapper>

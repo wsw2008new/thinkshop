@@ -4,9 +4,9 @@ import java.sql.SQLException;
 import java.util.List;
 import java.util.Map;
 
+import com.stone.shop.domain.manage.model.role.MenuRoleModel;
 import com.stone.shop.domain.manage.role.MenuEntity;
 import com.stone.shop.domain.manage.role.MenuRoleEntity;
-import com.stone.shop.domain.model.role.MenuRoleModel;
 
 public interface IMenuRoleMapper {
 
