@@ -37,7 +37,7 @@
 		<property name="dataSource" ref="admin-dataSource" />
 		<property name="configLocation" value="classpath:admin-mybatis-config.xml" />
 		<property name="mapperLocations"
-			value="classpath:com/mission/shop/admin/dao/mapper/*.xml" />
+			value="classpath:com/stone/shop/domain/*.xml" />
 	</bean>
 
 	<bean id="admin-mapper-scanner" class="org.mybatis.spring.mapper.MapperScannerConfigurer">
